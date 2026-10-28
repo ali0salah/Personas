@@ -1,0 +1,85 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+  --color-brand: #E3BB70;
+  --color-brand-hover: #D8A953;
+  --color-primary: #E3BB70;
+  --color-theme: #E3BB70;
+
+  --color-emerald-50: #FCF9F2;
+  --color-emerald-100: #F7EEDC;
+  --color-emerald-200: #EED7A6;
+  --color-emerald-300: #E8C98B;
+  --color-emerald-400: #E3BB70;
+  --color-emerald-500: #D8A953;
+  --color-emerald-600: #B88523;
+  --color-emerald-700: #84570D;
+  --color-emerald-800: #6B4408;
+  --color-emerald-900: #38260D;
+  --color-emerald-950: #1F1506;
+
+  --color-lime-50: #FDFCF8;
+  --color-lime-100: #FAF5E8;
+  --color-lime-200: #F3E4BF;
+  --color-lime-300: #E8CF94;
+
+  --color-green-50: #FCF9F2;
+  --color-green-300: #EED7A6;
+  --color-green-500: #E3BB70;
+  --color-green-600: #D8A953;
+}
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"] {
+  --theme-color: #E3BB70;
+  --primary: #E3BB70;
+  --color-primary: #E3BB70;
+  --accent: #E3BB70 !important;
+  --accent-foreground: #1F1506 !important;
+  --color-accent: #E3BB70 !important;
+  --heroui-accent: #E3BB70 !important;
+  --focus: #E3BB70 !important;
+}
+
+.container {
+  max-width: 1280px;
+  margin: auto;
+}
+
+.font {
+  font-family: "Rubik", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #a8a7a7;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #eeecec;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E3BB70;
+}
+
+::selection {
+  color: #1F1506;
+  background-color: #E3BB70;
+}
+
+[data-sonner-toast][data-mounted="true"] {
+  animation: slide-in-left 0.4s ease-out;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
