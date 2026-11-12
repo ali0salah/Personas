@@ -3,11 +3,10 @@ import { Button } from "@heroui/react";
 import axios from "axios";
 import { X } from "lucide-react";
 import { useContext, useRef, useState } from "react";
-import { baseurl } from "../../const/env";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 
 export default function Changeprofilephoto() {
   const { userData } = useContext(userdatacontext);
@@ -17,14 +16,17 @@ export default function Changeprofilephoto() {
   const [image, setimage] = useState("");
   const [src, setsrc] = useState("");
   function showoverlay() {
-    isShow = !isShow;
-    setshow(isShow);
+    setshow((prev) => !prev);
   }
 
   function changephoto(image: any) {
-    return axios.put(`${baseurl}/users/upload-photo`, image, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return axios.put(
+      `${import.meta.env.VITE_BASE_URL}/users/upload-photo`,
+      image,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
   }
   const query = useQueryClient();
   const { mutate, isPending } = useMutation({
@@ -43,6 +45,7 @@ export default function Changeprofilephoto() {
   function getimagefile(e: any) {
     setimage(e.target.files[0]);
     setsrc(URL.createObjectURL(e.target.files[0]));
+    showoverlay();
   }
 
   function submitChange() {
@@ -64,9 +67,8 @@ export default function Changeprofilephoto() {
       <div
         onClick={() => {
           photobtn.current?.click();
-          showoverlay();
         }}
-        className="rounded-full absolute right-0 bottom-2 cursor-pointer size-10 flex items-center justify-center bg-[#E3BB70]"
+        className="rounded-full absolute right-0 bottom-2 cursor-pointer size-10 flex items-center justify-center bg-emerald-400"
       >
         {" "}
         <Camera />
@@ -104,7 +106,7 @@ export default function Changeprofilephoto() {
             <div className="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
               <Button
                 onClick={submitChange}
-                className="w-full py-2.5 cursor-pointer bg-green-500 hover:bg-green-600 disabled:bg-green-300 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-xl transition-all active:scale-[0.98]"
+                className="w-full py-2.5 cursor-pointer bg-emerald-400 hover:bg-emerald-500 disabled:bg-emerald-200 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-xl transition-all active:scale-[0.98]"
               >
                 {isPending ? (
                   <svg

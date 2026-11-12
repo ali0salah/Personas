@@ -13,7 +13,7 @@ import Notifications from "../pages/Notifications/Notifications";
 import FollowSuggestions from "../components/Posts/Followsuggestion";
 
 export const routes = createBrowserRouter([
-  // Auth layout — pathless wrapper, children own their paths
+  // Auth layout
   {
     element: (
       <Authguard>
@@ -25,8 +25,7 @@ export const routes = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
     ],
   },
-
-  // Main layout — pathless wrapper, children own their paths
+  // Main layout
   {
     element: (
       <Mainguard>

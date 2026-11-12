@@ -1,7 +1,6 @@
 import { createContext, useContext, type ReactNode } from "react";
-import { type userDataShape } from "./../components/interface/userdatainterface";
+import { type userDataShape } from "../components/interface/userdatainterface";
 import axios from "axios";
-import { baseurl } from "./../const/env";
 import { authcontext } from "./authcontext";
 import { useQuery } from "@tanstack/react-query";
 
@@ -17,7 +16,7 @@ export function Userdataprovide({ children }: { children: ReactNode }) {
   const { token } = useContext(authcontext);
 
   function getdata() {
-    return axios.get(`${baseurl}/users/profile-data`, {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile-data`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

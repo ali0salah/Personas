@@ -1,7 +1,6 @@
 import { Ellipsis, Pencil, TrashBin } from "@gravity-ui/icons";
 import { Button, Dropdown, Label, useOverlayState } from "@heroui/react";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -26,7 +25,7 @@ export default function UpdateDeleteComment({
   });
 
   function deletecomment() {
-    return axios.delete(`${baseurl}/posts/${postid}/comments/${id}`, {
+    return axios.delete(`${import.meta.env.VITE_BASE_URL}/posts/${postid}/comments/${id}`, {
       headers: {
         Authorization: `Bearer ${token} `,
       },

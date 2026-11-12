@@ -1,25 +1,22 @@
 import { Post } from "../../components/Posts/PostLayout";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { BeatLoader } from "react-spinners";
 import { TriangleExclamationFill } from "@gravity-ui/icons";
-
 import type { post } from "../../components/interface/postinterface";
 import { Link } from "react-router-dom";
-import { userdatacontext } from "./../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { useQuery } from "@tanstack/react-query";
 import Createpost from "../../components/Posts/Createpost";
 import FollowSuggestions from "../../components/Posts/Followsuggestion";
 
 export default function Home() {
   const { token } = useContext(authcontext);
-
   const { userData } = useContext(userdatacontext);
 
   async function getposts() {
-    return await axios.get(`${baseurl}/posts`, {
+    return await axios.get(`${import.meta.env.VITE_BASE_URL}/posts`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -59,7 +56,7 @@ export default function Home() {
                       ? userData.photo
                       : "https://cdn-icons-png.flaticon.com/128/456/456212.png"
                   }
-                  alt="Alex Morgan"
+                  alt="Ren Amamiya"
                   className="mx-auto -mt-8 h-16 w-16 rounded-full border-4 border-white object-cover"
                 />
                 <strong className="mt-2 block text-sm">{userData?.name}</strong>

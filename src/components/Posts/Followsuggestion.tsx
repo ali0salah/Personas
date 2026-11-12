@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { Users, Search } from "lucide-react"; // or from @gravity-ui/icons
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { authcontext } from "../../context/authcontext";
 import { useQuery } from "@tanstack/react-query";
 import Followbtn from "./Followbtn";
@@ -12,7 +11,7 @@ export default function FollowSuggestions() {
   const [searchname, setname] = useState("");
 
   function getSuggetions() {
-    return axios.get(`${baseurl}/users/suggestions?limit=50`, {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/users/suggestions?limit=50`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

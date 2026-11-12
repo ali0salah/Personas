@@ -1,6 +1,5 @@
 import axios from "axios";
 import Commentsection from "./Commentsection";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +12,7 @@ export default function Postallcomments() {
   const { postid } = useParams();
 
   function getcomments() {
-    return axios.get(`${baseurl}/posts/${postid}/comments`, {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/posts/${postid}/comments`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

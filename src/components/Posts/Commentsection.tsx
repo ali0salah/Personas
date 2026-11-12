@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import type { TopComment } from "../interface/commentinterface";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import UpdateDeleteComment from "./UpdateDeleteComment";
 
 export default function Commentsection(comment: TopComment) {

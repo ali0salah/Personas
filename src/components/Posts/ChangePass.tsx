@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { LockKeyhole } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { toast } from "sonner";
@@ -33,7 +32,7 @@ export default function ChangePass() {
   });
 
   function sendpss(data: any) {
-    return axios.patch(`${baseurl}/users/change-password`, data, {
+    return axios.patch(`${import.meta.env.VITE_BASE_URL}/users/change-password`, data, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

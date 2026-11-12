@@ -2,11 +2,10 @@ import { EllipsisVertical, Pencil, TrashBin } from "@gravity-ui/icons";
 import { Button, Dropdown, Label } from "@heroui/react";
 import { X, Image as ImageIcon } from "lucide-react";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext, useRef, useState } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { useForm } from "react-hook-form";
 import type { updatePost } from "../interface/Updatepost";
 import { useNavigate } from "react-router-dom";
@@ -55,8 +54,7 @@ export default function DeleteEditpost({
   }
 
   function showoverlay() {
-    isShow = !isShow;
-    setshow(isShow);
+    setshow((prev) => !prev);
   }
 
   const query = useQueryClient();
@@ -66,7 +64,7 @@ export default function DeleteEditpost({
   }
 
   function deletePOst() {
-    return axios.delete(`${baseurl}/posts/${postId}`, {
+    return axios.delete(`${import.meta.env.VITE_BASE_URL}/posts/${postId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -78,11 +76,15 @@ export default function DeleteEditpost({
   }
 
   function updatepost(updaetdata: any) {
-    return axios.put(`${baseurl}/posts/${postId}`, updaetdata, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    return axios.put(
+      `${import.meta.env.VITE_BASE_URL}/posts/${postId}`,
+      updaetdata,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
   }
 
   {
@@ -161,7 +163,7 @@ export default function DeleteEditpost({
   }
 
   function submitupdate(data: any) {
-    if (!data.body && image) {
+    if (!data.body && !image) {
       return;
     }
 

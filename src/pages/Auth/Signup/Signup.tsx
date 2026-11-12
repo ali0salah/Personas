@@ -10,7 +10,7 @@ import {
 import { useForm } from "react-hook-form";
 import { signupSchema } from "../../../validation/signupschema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Signupapi } from "../../../Services/Auth/signuapi";
+import { Signupapi } from "../../../Services/Auth/signupapi";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthHeader } from "../../../components/authcomplayout/Authheader";
 import AuthLeftCard from "../../../components/authcomplayout/AuthLeftCard";
@@ -19,7 +19,6 @@ import { toast } from "sonner";
 
 export default function Signup() {
   const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -55,7 +54,6 @@ export default function Signup() {
         <AuthHeader />
         <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-5 pt-0 lg:grid-cols-[.8fr_1.2fr]">
           <AuthLeftCard />
-
           <div>
             <section
               id="signup"
@@ -229,7 +227,7 @@ export default function Signup() {
                     to={"/"}
                     className="font-bold text-slate-900 hover:text-emerald-800"
                   >
-                    Login 
+                    Login
                   </Link>
                 </div>
               </form>

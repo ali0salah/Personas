@@ -1,13 +1,12 @@
 import { PaperPlane, Picture } from "@gravity-ui/icons";
 import { CircleXmarkFill } from "@gravity-ui/icons";
 import { useContext, useRef, useState } from "react";
-import { userdatacontext } from "./../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { authcontext } from "../../context/authcontext";
 import { useForm } from "react-hook-form";
 import { Button, Modal, useOverlayState } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { toast } from "sonner";
 
 export default function UpdateComment({
@@ -60,7 +59,7 @@ export default function UpdateComment({
 
   function updateApi(commentdata: any) {
     return axios.put(
-      `${baseurl}/posts/${postid}/comments/${commentid}`,
+      `${import.meta.env.VITE_BASE_URL}/posts/${postid}/comments/${commentid}`,
       commentdata,
       {
         headers: { Authorization: `Bearer ${token}` },

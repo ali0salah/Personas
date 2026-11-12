@@ -5,6 +5,7 @@ import {
   type ReactNode,
   type SetStateAction,
 } from "react";
+
 type auth = {
   token: string | null;
   setToken: Dispatch<SetStateAction<string | null>>;

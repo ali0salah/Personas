@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { authcontext } from "../../context/authcontext";
 import { useQuery } from "@tanstack/react-query";
 import { type post as postinterface } from "./../../components/interface/postinterface";
@@ -17,9 +16,12 @@ export default function Profile() {
   const { token } = useContext(authcontext);
 
   function getprofileposts() {
-    return axios.get(`${baseurl}/users/${userData?._id}/posts`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return axios.get(
+      `${import.meta.env.VITE_BASE_URL}/users/${userData?._id}/posts`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
   }
 
   const { data, isLoading, isError } = useQuery({
@@ -39,7 +41,7 @@ export default function Profile() {
             <div className="h-56 sm:h-72 w-full overflow-hidden rounded-3xl shadow-sm">
               <img
                 src={
-                  userData?.cover == "" || null
+                  !userData?.cover
                     ? "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1600&h=500&fit=crop"
                     : userData?.cover
                 }

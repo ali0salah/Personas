@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useQuery } from "@tanstack/react-query";
@@ -13,8 +12,8 @@ export default function Singlepostdetails() {
   const { token } = useContext(authcontext);
   const { postid } = useParams();
 
-  function getpostdeatils() {
-    return axios.get(`${baseurl}/posts/${postid}`, {
+  function getpostdetails() {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/posts/${postid}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -22,7 +21,7 @@ export default function Singlepostdetails() {
   }
 
   const { data, isError, isLoading } = useQuery({
-    queryFn: getpostdeatils,
+    queryFn: getpostdetails,
     queryKey: ["postdetails", postid],
     select: (data) => {
       return data?.data.data.post;

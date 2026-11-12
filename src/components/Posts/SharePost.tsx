@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Share2 } from "lucide-react";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -12,7 +11,7 @@ export default function SharePost({ postId }: { postId: string }) {
 
   function Share() {
     return axios.post(
-      `${baseurl}/posts/${postId}/share`,
+      `${import.meta.env.VITE_BASE_URL}/posts/${postId}/share`,
       {},
 
       {

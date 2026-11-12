@@ -1,5 +1,4 @@
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +12,7 @@ export default function Notifications() {
   const { token } = useContext(authcontext);
   const navigate = useNavigate();
   function getNOTIfications() {
-    return axios.get(`${baseurl}/notifications?unread=false&page=1&limit=50`, {
+    return axios.get(`${import.meta.env.VITE_BASE_URL}/notifications?unread=false&page=1&limit=50`, {
       headers: { Authorization: `Bearer ${token}` },
     });
   }

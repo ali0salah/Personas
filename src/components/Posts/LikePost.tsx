@@ -1,11 +1,10 @@
 import { ThumbsUp, ThumbsUpFill } from "@gravity-ui/icons";
-import { baseurl } from "../../const/env";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { authcontext } from "../../context/authcontext";
 import axios from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@heroui/react";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { toast } from "sonner";
 
 export default function LikePost({
@@ -17,10 +16,22 @@ export default function LikePost({
 }) {
   const { token } = useContext(authcontext);
   const { userData } = useContext(userdatacontext);
-  const [like, setLike] = useState<boolean>(userData?._id ? liked.includes(userData._id) : false);
+  const [like, setLike] = useState<boolean>(() =>
+    userData?._id ? liked.includes(userData._id) : false,
+  );
+
+  // Sync like state if userData arrives after initial render
+  const prevUserIdRef = useRef<string | undefined>(undefined);
+  if (userData?._id !== prevUserIdRef.current) {
+    prevUserIdRef.current = userData?._id;
+    const serverValue = userData?._id ? liked.includes(userData._id) : false;
+    if (serverValue !== like) {
+      setLike(serverValue);
+    }
+  }
   function likepost() {
     return axios.put(
-      `${baseurl}/posts/${postid}/like`,
+      `${import.meta.env.VITE_BASE_URL}/posts/${postid}/like`,
       {},
       {
         headers: {

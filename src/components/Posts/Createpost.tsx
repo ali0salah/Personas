@@ -1,10 +1,9 @@
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { X, Image as ImageIcon, Image, PenLine } from "lucide-react";
 import { useContext, useRef, useState } from "react";
 import { Button } from "@heroui/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { authcontext } from "../../context/authcontext";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -22,8 +21,9 @@ export default function Createpost() {
     },
   });
 
+  // api
   function createPost(postData: any) {
-    return axios.post(`${baseurl}/posts`, postData, {
+    return axios.post(`${import.meta.env.VITE_BASE_URL}/posts`, postData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,10 +31,10 @@ export default function Createpost() {
   }
 
   function showoverlay() {
-    isShow = !isShow;
-    setshow(isShow);
+    setshow((prev) => !prev);
   }
 
+  // get image & preview
   function getimagefile(e: any) {
     setfile(e.target.files[0]);
     setsrc(URL.createObjectURL(e.target.files[0]));
@@ -45,6 +45,7 @@ export default function Createpost() {
       return;
     }
 
+    // form data
     const Fd = new FormData();
     if (data.body) {
       Fd.append("body", data.body);
@@ -68,7 +69,7 @@ export default function Createpost() {
     },
 
     onError: () => {
-      toast.error("An error happened try again ");
+      toast.error("An error happened try again");
     },
   });
 
@@ -84,24 +85,12 @@ export default function Createpost() {
               ? userData.photo
               : "https://cdn-icons-png.flaticon.com/128/456/456212.png"
           }
-          alt="Alex Morgan"
+          alt="Ren Amamiya"
           className="h-9 w-9 rounded-full object-cover"
         />
         <span className="flex-1 text-xs text-slate-400">
           What’s on your mind?
         </span>
-        <button
-          className=" text-slate-400  hover:text-green-500 transition-all duration-150 cursor-pointer   "
-          aria-label="Add image"
-        >
-          <Image size={19} />
-        </button>
-        <button
-          className="text-slate-400  hover:text-green-500 transition-all duration-150 cursor-pointer "
-          aria-label="Create post"
-        >
-          <PenLine size={19} />
-        </button>
       </div>
 
       {isShow ? (
@@ -186,7 +175,7 @@ export default function Createpost() {
                       onClick={() => {
                         imageinput.current?.click();
                       }}
-                      className="w-9 h-9 cursor-pointer flex items-center justify-center rounded-full hover:bg-green-50 text-green-600 transition"
+                      className="w-9 h-9 cursor-pointer flex items-center justify-center rounded-full hover:bg-emerald-50 text-emerald-600 transition"
                     >
                       <ImageIcon className="w-5 h-5" />
                     </button>
@@ -198,7 +187,7 @@ export default function Createpost() {
               <div className="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
                 <Button
                   type="submit"
-                  className="w-full py-2.5 cursor-pointer bg-green-500 hover:bg-green-600 disabled:bg-green-300 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-xl transition-all active:scale-[0.98]"
+                  className="w-full py-2.5 cursor-pointer bg-emerald-400 hover:bg-emerald-500 disabled:bg-emerald-200 disabled:cursor-not-allowed text-slate-900 font-semibold rounded-xl transition-all active:scale-[0.98]"
                 >
                   {isPending ? (
                     <svg

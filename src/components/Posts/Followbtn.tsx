@@ -1,6 +1,5 @@
 import { Button } from "@heroui/react";
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +10,7 @@ export default function Followbtn({ id }: { id: string }) {
 
   function follow() {
     return axios.put(
-      `${baseurl}/users/${id}/follow`,
+      `${import.meta.env.VITE_BASE_URL}/users/${id}/follow`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },

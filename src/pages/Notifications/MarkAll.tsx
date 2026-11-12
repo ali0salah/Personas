@@ -1,5 +1,4 @@
 import axios from "axios";
-import { baseurl } from "../../const/env";
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -10,7 +9,7 @@ export default function MarkAll() {
 
   function Markall() {
     return axios.patch(
-      `${baseurl}/notifications/read-all`,
+      `${import.meta.env.VITE_BASE_URL}/notifications/read-all`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },

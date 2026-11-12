@@ -1,15 +1,14 @@
 import { PaperPlane, Picture } from "@gravity-ui/icons";
 import { useContext, useRef, useState } from "react";
-import { userdatacontext } from "../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { useForm } from "react-hook-form";
 import { Button } from "@heroui/react";
-import { baseurl } from "../../const/env";
 import axios from "axios";
 import { authcontext } from "../../context/authcontext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-
 import { CircleXmarkFill } from "@gravity-ui/icons";
+
 export default function Commentinput({ postid }: { postid: string }) {
   const { userData } = useContext(userdatacontext);
   const imginput = useRef<HTMLInputElement | null>(null);
@@ -23,13 +22,18 @@ export default function Commentinput({ postid }: { postid: string }) {
   });
 
   function postcomment(commentData: any) {
-    return axios.post(`${baseurl}/posts/${postid}/comments`, commentData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    return axios.post(
+      `${import.meta.env.VITE_BASE_URL}/posts/${postid}/comments`,
+      commentData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
   }
 
+  // get image & preview
   function getimagefile(e: any) {
     setimage(e.target.files[0]);
     setsrc(URL.createObjectURL(e.target.files[0]));
@@ -47,7 +51,6 @@ export default function Commentinput({ postid }: { postid: string }) {
     if (imagefile) {
       Fd.append("image", imagefile);
     }
-
     mutate(Fd);
   }
 

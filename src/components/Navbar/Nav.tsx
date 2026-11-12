@@ -5,17 +5,15 @@ import {
 } from "@gravity-ui/icons";
 import { Button, Dropdown, Label } from "@heroui/react";
 import { Brand } from "../authcomplayout/Brand";
-
 import { useContext } from "react";
 import { authcontext } from "../../context/authcontext";
 import { Link, useNavigate } from "react-router-dom";
-import { userdatacontext } from "./../../context/Userdatacntext";
+import { userdatacontext } from "../../context/Userdatacontext";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { BellFill } from "@gravity-ui/icons";
 import axios from "axios";
-import { baseurl } from "../../const/env";
-
 import { PersonPlus } from "@gravity-ui/icons";
+
 export default function Nav() {
   const { setToken, token } = useContext(authcontext);
   const { userData } = useContext(userdatacontext);
@@ -23,9 +21,12 @@ export default function Nav() {
   const query = useQueryClient();
 
   function noticount() {
-    return axios.get(`${baseurl}/notifications/unread-count`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    return axios.get(
+      `${import.meta.env.VITE_BASE_URL}/notifications/unread-count`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      },
+    );
   }
 
   const { data } = useQuery({
@@ -73,6 +74,7 @@ export default function Nav() {
               {" "}
               <PersonPlus className="cursor-pointer  size-5 hover:text-emerald-700 transition-all duration-15" />
             </Link>
+
             <Dropdown>
               <Button
                 aria-label="Menu"

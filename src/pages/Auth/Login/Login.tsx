@@ -1,9 +1,6 @@
 import { useForm } from "react-hook-form";
-
 import { loginapi } from "../../../Services/Auth/loginapi";
-
 import { Link, useNavigate } from "react-router-dom";
-
 import { useContext } from "react";
 import { authcontext } from "../../../context/authcontext";
 import { LockKeyhole, Mail } from "lucide-react";
@@ -14,12 +11,9 @@ import { toast } from "sonner";
 
 export default function Login() {
   const { setToken } = useContext(authcontext);
-
   const navigate = useNavigate();
-
   const { register, handleSubmit } = useForm({
     mode: "onChange",
-
     defaultValues: {
       email: "",
       password: "",
@@ -32,7 +26,6 @@ export default function Login() {
       toast.success(response.data.message);
       setToken(response.data.data.token);
       localStorage.setItem("token", response.data.data.token);
-
       navigate("/Home");
     } catch {
       toast.error("Invalid email or password");
