@@ -1,5 +1,5 @@
 import { userdatacontext } from "../../context/Userdatacontext";
-import { X, Image as ImageIcon, Image, PenLine } from "lucide-react";
+import { X, Image as ImageIcon } from "lucide-react";
 import { useContext, useRef, useState } from "react";
 import { Button } from "@heroui/react";
 import { useForm } from "react-hook-form";
